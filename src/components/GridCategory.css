@@ -1,0 +1,8 @@
+ul{
+    list-style: none;
+    width: 90%;
+    margin: auto;
+}
+ul li{
+    width: 100%;
+}

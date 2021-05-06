@@ -1,0 +1,48 @@
+.one-category{
+    width: 100%;
+    height: 350px;
+    margin-top: 20px;
+}
+.main-content{
+    width: 100%;
+    height: 300px;
+    display: flex;
+}
+
+.list-items{
+    width: 92%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+.MuiSvgIcon-colorAction {
+    color: #f8f9fa !important;
+}
+.title{
+    font-size: 25px;
+    float: left;
+    color: white !important;
+    margin-left: 4%;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
