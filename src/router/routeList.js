@@ -1,4 +1,4 @@
 export default{
-    GENRE: "genre",
+    GENRE: "genre/:genreName",
     SEARCH: "search"
 }

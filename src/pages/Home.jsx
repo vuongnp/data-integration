@@ -5,10 +5,11 @@ import BigSlider from "../components/bigslider";
 import GridCategory from "../components/GridCategory";
 import "./Home.css"
 
-export default function Home() {
+export default function Home(props) {
+    // console.log(props)
   return (
     <div className="home-container">
-      <Header />
+      <Header props={props}/>
       <BigSlider />
       <GridCategory />
     </div>

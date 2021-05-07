@@ -1,9 +1,9 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 import Slide1 from "../assert/slide1.jpg";
-import "./SliderItem.css";
+import "./SliderFilmItem.css";
 
-export default function SliderItem(props) {
+export default function SliderFilmItem(props) {
   return (
     <ListGroup.Item>
       <div className="one-film">

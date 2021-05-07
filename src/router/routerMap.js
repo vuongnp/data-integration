@@ -9,28 +9,15 @@ import React from "react";
 // import history from "../router/history";
 import RouterList from "./routeList";
 import Home from "../pages/Home";
+import Genre from "../pages/Genre";
 
-class RouterMap extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact={true}>
-            <Home />
-          </Route>
-          <Route path={RouterList.GENRE} exact={true}>
-            {/* <Login/> */}
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
+export default function RouterMap() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/genre/:genreName"  component={Genre} />
+      </Switch>
+    </BrowserRouter>
+  );
 }
-
-export default RouterMap;

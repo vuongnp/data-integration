@@ -1,0 +1,10 @@
+.contain-paging{
+    width: 350px;
+    height: 40px;
+    margin: auto;
+    line-height: 40px;
+    background-color: honeydew;
+}
+.MuiPagination-ul {
+    flex-wrap: nowrap !important;
+}
