@@ -1,27 +1,35 @@
-import React from "react";
+import React, { useState, useEffect }from "react";
 import { Link } from "react-router-dom";
-import { ListGroup, Button } from "react-bootstrap";
 import { IconButton } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import SliderFilmItem from "./SliderFilmItem";
 import "./OneCategory.css";
+import axios from 'axios';
 
 export default function OneCategory(props) {
-  const films = [
-    { id: "1", name: "AAAA" },
-    { id: "2", name: "BBB" },
-    { id: "1", name: "AAAA" },
-    { id: "2", name: "BBB" },
-    { id: "1", name: "AAAA" },
-    { id: "2", name: "BBB" },
-    { id: "1", name: "AAAA" },
-    { id: "2", name: "BBB" },
-    { id: "1", name: "AAAA" },
-    { id: "2", name: "BBB" },
-    { id: "1", name: "AAAA" },
-    { id: "2", name: "BBB" },
-  ];
+  let [films, setFilms] = React.useState([
+      { id: "1", name: "AAAA" },
+      { id: "2", name: "BBB" },
+      { id: "1", name: "AAAA" },
+      { id: "2", name: "BBB" },
+      { id: "1", name: "AAAA" },
+      { id: "2", name: "BBB" },
+      { id: "1", name: "AAAA" },
+      { id: "2", name: "BBB" },
+      { id: "1", name: "AAAA" },
+      { id: "2", name: "BBB" },
+      { id: "1", name: "AAAA" },
+      { id: "2", name: "BBB" },
+    ]);
+  let nameCategory = Object.keys(props.genre)[0];
+  useEffect(async () => {
+    const result = await axios(
+      'https://data-intergration.herokuapp.com/category?text='+nameCategory,
+    );
+ 
+    setFilms(result.data);
+  },[]);
   const ref = React.useRef(null);
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
@@ -36,8 +44,8 @@ export default function OneCategory(props) {
           <ChevronLeftIcon color="action" />
         </IconButton>
         <div className="list-items" ref={ref}>
-          {films.map((item, index) => (
-            <SliderFilmItem key={index} name={item.name} />
+          {(films.slice(0,30)).map((item, index) => (
+            <SliderFilmItem key={index} item={item}/>
           ))}
         </div>
         <IconButton aria-label="croll-right" onClick={() => scroll(+1250)}>

@@ -8,6 +8,7 @@
     width: 60%;
     height: 100%;
     position: relative;
+    text-align: center;
 }
 img{
     width: 100%;
@@ -16,11 +17,12 @@ img{
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
-h3{
-    position: absolute;
-    left: 20px;
-    bottom: 10px;
+.one-item .left-item p{
     color: white;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    font-size: 26px;
 }
 .one-item .right-item{
     width: 40%;
@@ -31,6 +33,9 @@ h3{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-left: 2px solid white;
+}
+.one-item .right-item .imdb-score{
+   color: white;
 }
 .one-item .right-item div{
     width: 100%;

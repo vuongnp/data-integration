@@ -10,17 +10,17 @@ import Paging from "../components/Pagination";
 
 export default function Genre(props) {
   // console.log(props);
-  let { genreName } = useParams();
+  let { text } = useParams();
   // console.log(genreName);
   let [films, setFilms] = React.useState([]);
-  useEffect(async () => {
-    const result = await axios(
-      "https://data-intergration.herokuapp.com/category?text=" + genreName
-    );
+  useEffect(() => {
+    // GET request using axios inside useEffect React hook
+    axios
+      .get("https://data-intergration.herokuapp.com/search?text=" + text)
+      .then((response) => setFilms(response.data));
 
-    setFilms(result.data);
-  });
-  // console.log(films);
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  }, []);
   return (
     <div className="container-films">
       <Header />

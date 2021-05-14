@@ -1,9 +1,11 @@
 import React from "react";
+
 import OneCategory from "./OneCategory";
 import "./GridCategory.css"
 
 export default function GridCategory() {
-  const categories = [{'action':"HÀNH ĐỘNG"},{'kid':"TRẺ EM"},{'drama':"KỊCH TÍNH"}];
+  // let [categories, setCategories] = React.useState([]);
+  const categories = [{'imdb':"TOP IMDB"},{'action':"HÀNH ĐỘNG"},{'kid':"TRẺ EM"},{'drama':"KỊCH TÍNH"}];
   return (
       <ul className="#content">
         {categories.map((item) => (

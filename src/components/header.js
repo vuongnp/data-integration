@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import {
   Navbar,
   Nav,
@@ -6,13 +6,38 @@ import {
   Form,
   FormControl,
   Button,
+  Container,
+  Row,
+  Col,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import "./header.css";
 
-export default function Header(props) {
-  console.log("header",props)
+export default function Header() {
+  let [searchvalue, setSearchValue] = useState('');
+  let onSearch=()=>{
+    console.log(searchvalue);
+    setSearchValue('');
+  }
+  const handleChange = e => {
+    setSearchValue(e.target.value)
+    // console.log(searchvalue)
+  }
+  const categories = [
+    { "mystery": "Bí ẩn" },
+    { "war": "Chiến tranh" },
+    { "drama": "Kịch tính" },
+    { "family": "Gia đình" },
+    { "comedy": "Hài hước" },
+    { "action": "Hành động" },
+    { "animation": "Hoạt hình" },
+    { "scifi-fantasy": "Khoa học" },
+    { "horror": "Kinh dị" },
+    { "romance": "Lãng mạn" },
+    { "kid": "Trẻ em" },
+    { "tv-movie": "TV Show" },
+  ];
   return (
     <Navbar expand="lg" bg="dark" variant="dark" fixed="top">
       <Navbar.Brand href="/" style={{ fontSize: "28px" }}>
@@ -27,24 +52,29 @@ export default function Header(props) {
           <Nav.Link href="#link" style={{ color: "white" }}>
             Thống kê
           </Nav.Link>
-          <NavDropdown title="Thể loại" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            {/* <Link to="genre/action" className="title">
-              Hành động
-            </Link> */}
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+          <NavDropdown title="Danh mục" id="basic-nav-dropdown">
+            <Row>
+              {categories.map((item) => (
+                <Col xs={4}>
+                  <NavDropdown.Item href={`/genre/${Object.keys(item)[0]}`}>
+                    {Object.values(item)[0]}
+                  </NavDropdown.Item>
+                </Col>
+              ))}
+            </Row>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item>
+            <NavDropdown.Item href="/genre/imdb">Top IMDB</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Form inline>
-          <FormControl type="text" placeholder="Tìm kiếm" className="mr-sm-2" />
-          <Button variant="outline-warning">Tìm kiếm</Button>
+          <FormControl
+            type="text"
+            placeholder="Tên phim, diễn viên,..."
+            className="mr-sm-2"
+            value={searchvalue}
+            onChange={handleChange}
+          />
+          <Button variant="outline-warning" href={searchvalue!='' ? `/search/${searchvalue}`:'#'}>Tìm kiếm</Button>
         </Form>
       </Navbar.Collapse>
     </Navbar>
