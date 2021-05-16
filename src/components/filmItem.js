@@ -4,6 +4,14 @@ import "./filmItem.css";
 
 export default function FilmItem(props) {
   const listlinks = props.item.links;
+  const getNamePage=(link)=>{
+    let list = link.split('/');
+    if (list.length ==1){
+      return "###"
+    }
+    let domain = (list[2]).split('.')[1];
+    return domain
+  }
   return (
     // <ListGroup.Item>
     <div className="one-item">
@@ -16,7 +24,7 @@ export default function FilmItem(props) {
         {listlinks &&
           listlinks.map((link) => (
             <div>
-              <a href={link}>Link {listlinks.indexOf(link) + 1}</a>
+              <a href={link}>{getNamePage(link)}</a>
             </div>
           ))}
       </div>

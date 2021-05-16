@@ -28,8 +28,12 @@ p{
     position: absolute;
     left: 0px;
     top: 0px;
+    text-align: center;
+    background-color: rgba(126, 123, 119, 0.322);
+    transition-delay: 2s;
 }
-.watch-now .link-to-watch{
-    margin: auto;
-    margin-top: 70%
+.watch-now a{
+    color: #e2e26b;
+    font-size: 24px;
+    font-weight: bold;
 }

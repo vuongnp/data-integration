@@ -6,6 +6,8 @@
     background-color: honeydew;
     border-radius: 2px;
     padding-left: 3px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .MuiPagination-ul {
     flex-wrap: nowrap !important;
