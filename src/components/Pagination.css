@@ -1,14 +1,11 @@
 .contain-paging{
-    width: 350px;
-    height: 40px;
-    margin: auto;
-    line-height: 40px;
-    background-color: honeydew;
-    border-radius: 2px;
-    padding-left: 3px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-left: 15%;
+    /* margin-top: 100px; */
+    margin-bottom: 10px;
 }
-.MuiPagination-ul {
-    flex-wrap: nowrap !important;
+.MuiPagination-ul li{
+    display: contents;
+}
+.MuiPagination-ul li path{
+    color: white
 }

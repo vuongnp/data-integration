@@ -1,12 +1,18 @@
 import React from "react";
 import { Pagination } from "@material-ui/lab";
 
-import "./Pagination.css"
+import "./Pagination.css";
 
-export default function Paging() {
+export default function Paging(props) {
   return (
     <div className="contain-paging">
-      <Pagination count={10} variant="outlined" shape="rounded" className="paging" color="primary"/>
+      <Pagination
+        count={props.count}
+        onChange={props.onChange}
+        variant="text"
+        shape="rounded"
+        color="secondary"
+      />
     </div>
   );
 }

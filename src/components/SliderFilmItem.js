@@ -26,7 +26,7 @@ export default function SliderFilmItem(props) {
         {isHovering && (
           <div class="watch-now">
             <div style={{fontSize: 26, color: "white", fontWeight:"bold"}}>Xem ngay</div>
-            {props.item.links.map((link) => (
+            {props.item.links && props.item.links.map((link) => (
               <div>
                 <a href={link}>{getNamePage(link)}</a>
               </div>

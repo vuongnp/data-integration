@@ -8,26 +8,49 @@ import "./Genre.css";
 import FilmItem from "../components/filmItem";
 import Paging from "../components/Pagination";
 
-export default function Genre(props) {
-  // console.log(props);
+export default function Genre() {
   let { genreName } = useParams();
   // console.log(genreName);
-  let [films, setFilms] = React.useState([]);
-  useEffect(async () => {
-    const result = await axios(
-      "https://data-intergration.herokuapp.com/category?text=" + genreName
-    );
+  let [films, setFilms] = useState([]);
+  const [filmsPage, setFilmsPage] = useState([]);
+  const numberFilmsPage = 9;
+  const [numberPages, setNumberPages] = useState(1);
 
-    setFilms(result.data);
-  });
+  const handleNextPage = (event, page) => {
+    let start = (page - 1) * numberFilmsPage;
+    let end = start + numberFilmsPage;
+    setFilmsPage(films.slice(start, end));
+  };
+  useEffect(() => {
+    axios
+      .get("https://data-intergration.herokuapp.com/category?text=" + genreName)
+      .then((response) => {
+        setFilms(response.data);
+        setNumberPages(Math.ceil(response.data.length / numberFilmsPage));
+        setFilmsPage(response.data.slice(0, numberFilmsPage));
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+    // const result = await axios(
+    //   "https://data-intergration.herokuapp.com/category?text=" + genreName
+    // );
+
+    // setFilms(result.data);
+  },[]);
   // console.log(films);
   return (
     <div className="container-films">
       <Header />
+      <Paging
+        count={numberPages}
+        onChange={(event, page) => handleNextPage(event, page)}
+      />
       <div className="main">
         <Container>
           <Row>
-            {films.map((item) => (
+            {filmsPage.map((item) => (
               <Col xs={4}>
                 <FilmItem item={item} />
               </Col>
@@ -35,7 +58,10 @@ export default function Genre(props) {
           </Row>
         </Container>
       </div>
-      <Paging />
+      <Paging
+        count={numberPages}
+        onChange={(event, page) => handleNextPage(event, page)}
+      />
     </div>
   );
 }
