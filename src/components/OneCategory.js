@@ -6,6 +6,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import SliderFilmItem from "./SliderFilmItem";
 import "./OneCategory.css";
 import axios from 'axios';
+import config from "../config/config";
 
 export default function OneCategory(props) {
   let [films, setFilms] = React.useState([
@@ -25,7 +26,7 @@ export default function OneCategory(props) {
   let nameCategory = Object.keys(props.genre)[0];
   useEffect(async () => {
     const result = await axios(
-      'https://data-intergration.herokuapp.com/category?text='+nameCategory,
+      `${config.SERVER_URI}/category?text=`+nameCategory,
     );
  
     setFilms(result.data);

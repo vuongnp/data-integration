@@ -48,6 +48,7 @@ import Header from "../components/header";
 import "./Genre.css";
 import FilmItem from "../components/filmItem";
 import Paging from "../components/Pagination";
+import config from "../config/config";
 
 export default function Search() {
   let { text } = useParams();
@@ -64,7 +65,7 @@ export default function Search() {
   };
   useEffect(() => {
     axios
-    .get("https://data-intergration.herokuapp.com/search?text=" + text)
+    .get(`${config.SERVER_URI}/search?text=` + text)
       .then((response) => {
         setFilms(response.data);
         setTotalFilms(response.data.length);

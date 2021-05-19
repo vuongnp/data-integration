@@ -7,6 +7,7 @@ import Header from "../components/header";
 import "./Genre.css";
 import FilmItem from "../components/filmItem";
 import Paging from "../components/Pagination";
+import config from "../config/config";
 
 export default function Genre() {
   let { genreName } = useParams();
@@ -23,7 +24,7 @@ export default function Genre() {
   };
   useEffect(() => {
     axios
-      .get("https://data-intergration.herokuapp.com/category?text=" + genreName)
+      .get(`${config.SERVER_URI}/category?text=` + genreName)
       .then((response) => {
         setFilms(response.data);
         setNumberPages(Math.ceil(response.data.length / numberFilmsPage));
