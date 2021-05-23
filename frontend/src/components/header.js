@@ -28,15 +28,13 @@ export default function Header() {
     { "mystery": "Bí ẩn" },
     { "war": "Chiến tranh" },
     { "drama": "Kịch tính" },
-    { "family": "Gia đình" },
+    { "familly": "Gia đình" },
     { "comedy": "Hài hước" },
     { "action": "Hành động" },
     { "animation": "Hoạt hình" },
-    { "scifi-fantasy": "Khoa học" },
+    { "sci-fi": "Khoa học" },
     { "horror": "Kinh dị" },
     { "romance": "Lãng mạn" },
-    { "kid": "Trẻ em" },
-    { "tv-movie": "TV Show" },
   ];
   return (
     <Navbar expand="lg" bg="dark" variant="dark" fixed="top">

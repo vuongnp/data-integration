@@ -5,7 +5,7 @@ import "./GridCategory.css"
 
 export default function GridCategory() {
   // let [categories, setCategories] = React.useState([]);
-  const categories = [{'imdb':"TOP IMDB"},{'action':"HÀNH ĐỘNG"},{'kid':"TRẺ EM"},{'drama':"KỊCH TÍNH"}];
+  const categories = [{'imdb':"TOP IMDB"},{'action':"HÀNH ĐỘNG"},{'romance':"LÃNG MẠN"},{'drama':"KỊCH TÍNH"}];
   return (
       <ul className="#content">
         {categories.map((item) => (

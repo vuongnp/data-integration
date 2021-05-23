@@ -22,22 +22,15 @@ export default function SliderFilmItem(props) {
         onMouseLeave={() => serIsHovering(false)}
       >
         <img src={props.item.image} alt=""></img>
-        <p>{props.item.name}</p>
+        <p>{props.item.title}</p>
         {isHovering && (
           <div class="watch-now">
             <div style={{fontSize: 26, color: "white", fontWeight:"bold"}}>Xem ngay</div>
-            {props.item.links && props.item.links.map((link) => (
+            {props.item.urls && props.item.urls.map((link) => (
               <div>
                 <a href={link}>{getNamePage(link)}</a>
               </div>
             ))}
-            {/* <Button
-              href={props.item.links[0]}
-              className="link-to-watch"
-              variant="danger"
-            >
-              Xem ngay
-            </Button> */}
           </div>
         )}
       </div>

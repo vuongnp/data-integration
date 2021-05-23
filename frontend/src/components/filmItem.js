@@ -3,7 +3,7 @@ import Slide1 from "../assert/slide1.jpg";
 import "./filmItem.css";
 
 export default function FilmItem(props) {
-  const listlinks = props.item.links;
+  const listlinks = props.item.urls;
   const getNamePage=(link)=>{
     let list = link.split('/');
     if (list.length ==1){
@@ -17,10 +17,10 @@ export default function FilmItem(props) {
     <div className="one-item">
       <div className="left-item">
         <img src={props.item.image}></img>
-        <p>{props.item.name}</p>
+        <p>{props.item.title}</p>
       </div>
       <div className="right-item">
-        <span className="imdb-score">IMDB {props.item.imdb}</span>
+        <span className="imdb-score">IMDB {props.item.rating}</span>
         {listlinks &&
           listlinks.map((link) => (
             <div>

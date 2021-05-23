@@ -14,7 +14,7 @@ export default function Genre() {
   // console.log(genreName);
   let [films, setFilms] = useState([]);
   const [filmsPage, setFilmsPage] = useState([]);
-  const numberFilmsPage = 9;
+  const numberFilmsPage = 30;
   const [numberPages, setNumberPages] = useState(1);
 
   const handleNextPage = (event, page) => {
@@ -26,9 +26,9 @@ export default function Genre() {
     axios
       .get(`${config.SERVER_URI}/category?text=` + genreName)
       .then((response) => {
-        setFilms(response.data);
-        setNumberPages(Math.ceil(response.data.length / numberFilmsPage));
-        setFilmsPage(response.data.slice(0, numberFilmsPage));
+        setFilms(response.data.data);
+        setNumberPages(Math.ceil(response.data.data.length / numberFilmsPage));
+        setFilmsPage(response.data.data.slice(0, numberFilmsPage));
         // console.log(response.data);
       })
       .catch((error) => {
@@ -44,6 +44,7 @@ export default function Genre() {
   return (
     <div className="container-films">
       <Header />
+      <div style={{marginTop:"100px"}}></div>
       <Paging
         count={numberPages}
         onChange={(event, page) => handleNextPage(event, page)}

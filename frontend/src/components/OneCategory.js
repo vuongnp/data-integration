@@ -9,7 +9,7 @@ import axios from 'axios';
 import config from "../config/config";
 
 export default function OneCategory(props) {
-  let [films, setFilms] = React.useState([
+  let [films, setFilms] = useState([
       { id: "1", name: "AAAA" },
       { id: "2", name: "BBB" },
       { id: "1", name: "AAAA" },
@@ -24,13 +24,16 @@ export default function OneCategory(props) {
       { id: "2", name: "BBB" },
     ]);
   let nameCategory = Object.keys(props.genre)[0];
-  useEffect(async () => {
-    const result = await axios(
-      `${config.SERVER_URI}/category?text=`+nameCategory,
-    );
- 
-    setFilms(result.data);
-  },[]);
+  useEffect(() => {
+    axios
+      .get(`${config.SERVER_URI}/category?text=`+nameCategory)
+      .then((response) => {
+        setFilms(response.data.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, []);
   const ref = React.useRef(null);
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
