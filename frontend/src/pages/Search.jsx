@@ -31,7 +31,7 @@ export default function Search() {
         setTotalFilms(response.data.data.length);
         setNumberPages(Math.ceil(response.data.data.length / numberFilmsPage));
         setFilmsPage(response.data.data.slice(0, numberFilmsPage));
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         console.error("There was an error!", error);
