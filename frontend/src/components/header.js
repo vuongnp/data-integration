@@ -35,6 +35,11 @@ export default function Header() {
     { "sci-fi": "Khoa học" },
     { "horror": "Kinh dị" },
     { "romance": "Lãng mạn" },
+    { "adventure":"Phiêu lưu"},
+    { "music":"Âm nhạc"},
+    { "kids":"Trẻ em",
+    { "documentary":"Phim tài liệu"}
+}
   ];
   return (
     <Navbar expand="lg" bg="dark" variant="dark" fixed="top">

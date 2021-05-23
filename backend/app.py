@@ -2,7 +2,13 @@ from flask import Flask, request, Response, jsonify
 from database.db import initialize_db
 from database.general import General
 from flask_cors import CORS
-import json
+import pymongo
+import os
+from dotenv import load_dotenv
+
+from statictic.getStatistic import countByYear, countByGenre
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -10,8 +16,10 @@ app = Flask(__name__)
 #     'host': 'mongodb+srv://vuongnp:1234566@vuongcluster1.gl4g4.mongodb.net/film'
 # }
 app.config['MONGODB_SETTINGS'] = {
-    'host': 'mongodb+srv://hoangcongtue99:hoangcongtue99@cluster0.etpgx.mongodb.net/film'
+    'host': os.getenv("MONGODB_URI")
 }
+client = pymongo.MongoClient(os.getenv("MONGODB_CLIENT"))
+db = client.film
 
 CORS(app)
 
@@ -32,7 +40,8 @@ def get_movies():
         start = int(limit)*(int(page)-1)
         end = start+int(limit)
         movies = movies[start:end]  
-    return Response(movies.to_json(), mimetype="application/json", status=200)
+    res = {'data': movies}
+    return res
 
 @app.route('/search', methods=['GET'])
 def search_movies():
@@ -52,16 +61,21 @@ def get_movies_by_catogory():
     res = {'data': movies}
     return res
 
-# @app.route('/home', methods=['GET'])
-# def get_home():
-#     imdb = Movie.objects(imdb__exists=True).order_by('-imdb')[:30]
-#     action = Movie.objects(genres__icontains='action').order_by('-imdb')[:30]
-#     animation = Movie.objects(genres__icontains='animation').order_by('-imdb')[:30]
-#     kid = Movie.objects(genres__icontains='kid').order_by('-imdb')[:30]
-#     movies = (imdb.to_json(),action.to_json(),animation.to_json(),kid.to_json())
-#     # print(movies.to_json())
-#     res = Response(movies, mimetype="application/json", status=200)
-#     return res
+@app.route('/statistic', methods=['GET'])
+def get_statistic():
+    general = list(db.general.find({},{'_id':0}))
+    label1,data1 = countByYear(general)
+    label2,data2 = countByGenre(general)
+    statisticYear={'labels':label1, 'data':data1}
+    statisticGenres = {'labels':label2, 'data':data2}
+    res = {'statisticYear': statisticYear, 'statisticGenres':statisticGenres}
+    return res
+
+@app.route('/stat', methods=['GET'])
+def stat_movie():
+    text = request.args.get("text")
+    movies = Movie.objects.search_text(text).order_by('$text_score')
+    return Response(movies.to_json(), mimetype="application/json", status=200)
 
 
 if __name__ == '__main__':
