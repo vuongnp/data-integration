@@ -37,10 +37,9 @@ export default function Header() {
     { "romance": "Lãng mạn" },
     { "adventure":"Phiêu lưu"},
     { "music":"Âm nhạc"},
-    { "kids":"Trẻ em",
+    { "kids":"Trẻ em"},
     { "documentary":"Phim tài liệu"}
-}
-  ];
+];
   return (
     <Navbar expand="lg" bg="dark" variant="dark" fixed="top">
       <Navbar.Brand href="/" style={{ fontSize: "28px" }}>
@@ -52,13 +51,13 @@ export default function Header() {
           <Nav.Link href="/" style={{ color: "white" }}>
             Trang chủ
           </Nav.Link>
-          <Nav.Link href="#link" style={{ color: "white" }}>
+          <Nav.Link href="/stat" style={{ color: "white" }}>
             Thống kê
           </Nav.Link>
           <NavDropdown title="Danh mục" id="basic-nav-dropdown">
             <Row>
-              {categories.map((item) => (
-                <Col xs={4}>
+              {categories.map((item, index) => (
+                <Col xs={4} key={index}>
                   <NavDropdown.Item href={`/genre/${Object.keys(item)[0]}`}>
                     {Object.values(item)[0]}
                   </NavDropdown.Item>

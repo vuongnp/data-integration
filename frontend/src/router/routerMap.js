@@ -3,14 +3,15 @@ import {
   Route,
   Switch,
   withRouter,
+  Router,
   BrowserRouter,
 } from "react-router-dom";
 import React from "react";
 // import history from "../router/history";
-import RouterList from "./routeList";
 import Home from "../pages/Home";
 import Genre from "../pages/Genre";
 import Search from "../pages/Search";
+import Stat from "../pages/Stat";
 
 export default function RouterMap() {
   return (
@@ -19,6 +20,7 @@ export default function RouterMap() {
         <Route exact path="/" component={Home} />
         <Route exact path="/genre/:genreName"  component={Genre} />
         <Route exact path="/search/:text"  component={Search} />
+        <Route exact path="/stat" component={Stat} />
       </Switch>
     </BrowserRouter>
   );
