@@ -52,11 +52,11 @@ export default function Stat(props) {
   let startColor = 255;
   const randomColors = genreStat.labels.map((item, index) => {
     startColor -= 20;
-    return `rgba(${startColor}, ${255 - startColor}, 0, 1)`;
+    return `rgba(${startColor}, ${255 - startColor}, 1, 0.8)`;
   })
   const randomBColors = genreStat.labels.map((item, index) => {
     startColor -= 30;
-    return `rgba(20, ${startColor}, ${255 - startColor}, 1)`;
+    return `rgba(-20, ${startColor}, ${255 - startColor}, 0.8)`;
   })
   console.debug("Random"+JSON.stringify(randomColors));
 
@@ -76,27 +76,27 @@ export default function Stat(props) {
         //   'rgba(153, 102, 255, 1)',
         //   'rgba(255, 159, 64, 1)',
         // ],
-        borderWidth: 1,
+        borderWidth: 2,
       },
     ],
   };
 
   return(
-    <div className="container-films">
+    <div className="container-stat">
       <Header />
       <div style={{marginTop:"100px"}}></div>
       <div className="stat-container">
         <div>
-          <h6 style={{color: "white"}}>
+          <h3 style={{color: "black"}}>
             Thống kê số lượng phim theo khoảng thời gian
-          </h6>
+          </h3>
           <Bar
             data={{
               labels: ylabels,
               datasets: [
                 {
                   label: "Khoảng thời gian",
-                  backgroundColor: ["lightBlue"
+                  backgroundColor: ["#8e5ea2"
                   //   "#3e95cd",
                   //   "#8e5ea2",
                   //   "#3cba9f",
@@ -110,7 +110,7 @@ export default function Stat(props) {
             options={{
               legend: { display: true },
               title: {
-                color: "white",
+                color: "black",
                 display: true,
                 text: "Thống kê phim"
               }
@@ -119,11 +119,12 @@ export default function Stat(props) {
         </div>
       </div>
       <div className="stat-container">
-        <h6 style={{color: "white", marginTop: "50px"}}>
+        <h3 style={{color: "black", marginTop: "70px"}}>
           Thống kê tỉ lệ phim theo thể loại
-        </h6>
+        </h3>
         <Doughnut data={sData} />
       </div>
+      <div style={{marginBottom:"100px"}}></div>
     </div>
   )
 }

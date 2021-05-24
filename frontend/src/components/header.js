@@ -28,7 +28,7 @@ export default function Header() {
     { "mystery": "Bí ẩn" },
     { "war": "Chiến tranh" },
     { "drama": "Kịch tính" },
-    { "familly": "Gia đình" },
+    { "family": "Gia đình" },
     { "comedy": "Hài hước" },
     { "action": "Hành động" },
     { "animation": "Hoạt hình" },
