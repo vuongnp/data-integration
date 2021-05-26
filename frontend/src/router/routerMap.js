@@ -21,6 +21,7 @@ export default function RouterMap() {
         <Route exact path="/genre/:genreName"  component={Genre} />
         <Route exact path="/search/:text"  component={Search} />
         <Route exact path="/stat" component={Stat} />
+        <Route match = {false} component={() => <Redirect to="/"/>} />
       </Switch>
     </BrowserRouter>
   );
