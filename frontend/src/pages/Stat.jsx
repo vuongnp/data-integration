@@ -200,7 +200,7 @@ export default function Stat(props) {
         </h3>
         <Bar
           data={{
-            labels: urlStat.labels,
+            labels: [...urlStat.labels].slice().splice(1, urlStat.labels.length),
             datasets: [
               {
                 label: "Số lượng",
@@ -211,7 +211,7 @@ export default function Stat(props) {
                 //   "#e8c3b9",
                 //   "#c45850"
                 ],
-                data: [...urlStat.data]
+                data: [...urlStat.data].slice().splice(1, urlStat.data.length)
               }
             ]
           }}
