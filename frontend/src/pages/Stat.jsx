@@ -1,7 +1,7 @@
 import Header from "../components/header"
 import "./Genre.css";
 import React from "react";
-import { Bar, Doughnut } from "react-chartjs-2";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { useEffect } from "react";
 import axios from "axios";
 import config from "../config/config";
@@ -17,14 +17,24 @@ export default function Stat(props) {
     labels: [],
     data: []
   });
+  const [urlStat, setUrlStat] = useState({
+    labels: [],
+    data: []
+  });
+  const [ratingStat, setRating] = useState({
+    labels: [],
+    data: []
+  });
 
   useEffect(() => {
     async function fetch() {
       try {
         const res = await axios.get(`${config.SERVER_URI}`+"/statistic");
         if (res && res.status === 200) {
-          setYearStat(res.data.statisticYear)
-          setGenreStat(res.data.statisticGenres)
+          setYearStat(res.data.statisticYear);
+          setGenreStat(res.data.statisticGenres);
+          setUrlStat(res.data.statisticNumUrls);
+          setRating(res.data.statisticAvgRating);
         }
       }
       catch(e) {
@@ -68,6 +78,7 @@ export default function Stat(props) {
     "A00000", "00A000", "0000A0", "A0A000", "A000A0", "00A0A0", "A0A0A0", 
     "E00000", "00E000", "0000E0", "E0E000", "E000E0", "00E0E0", "E0E0E0", 
   ];
+  const randomHex = randomColors.map((c) => "#" + c);
   function hexToRgbA(hex){
     var c;
     if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
@@ -115,7 +126,7 @@ export default function Stat(props) {
           <h3 style={{color: "black"}}>
             Thống kê số lượng phim theo khoảng thời gian
           </h3>
-          <Bar
+          <Line
             data={{
               labels: ylabels,
               datasets: [
@@ -148,6 +159,72 @@ export default function Stat(props) {
           Thống kê tỉ lệ phim theo thể loại
         </h3>
         <Doughnut data={sData} />
+      </div>
+      <div style={{marginBottom:"100px"}}></div>
+      <div className="stat-container">
+        <h3 style={{color: "black"}}>
+          Thống kê điểm IMDB theo thể loại
+        </h3>
+        <Bar
+          data={{
+            labels: ratingStat.labels,
+            datasets: [
+              {
+                label: "Điểm",
+                // backgroundColor: ["#89ff89"
+                // //   "#3e95cd",
+                // //   "#8e5ea2",
+                // //   "#3cba9f",
+                // //   "#e8c3b9",
+                // //   "#c45850"
+                // ],
+                backgroundColor: randomHex,
+                data: [...ratingStat.data]
+              }
+            ]
+          }}
+          options={{
+            legend: { display: true },
+            title: {
+              color: "black",
+              display: true,
+              text: "Thống kê phim"
+            }
+          }}
+        />
+      </div>
+      <div style={{marginBottom:"100px"}}></div>
+      <div className="stat-container-scale">
+        <h3 style={{color: "black"}}>
+          Thống kê số lượng phim theo số nguồn
+        </h3>
+        <Bar
+          data={{
+            labels: urlStat.labels,
+            datasets: [
+              {
+                label: "Số lượng",
+                backgroundColor: ["#ffe4b2"
+                //   "#3e95cd",
+                //   "#8e5ea2",
+                //   "#3cba9f",
+                //   "#e8c3b9",
+                //   "#c45850"
+                ],
+                data: [...urlStat.data]
+              }
+            ]
+          }}
+          options={{
+            indexAxis: 'y',
+            legend: { display: true },
+            title: {
+              color: "black",
+              display: true,
+              text: "Thống kê phim"
+            }
+          }}
+        />
       </div>
       <div style={{marginBottom:"100px"}}></div>
     </div>

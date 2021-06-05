@@ -11,3 +11,10 @@
   width: 50%;
   margin: auto
 }
+.stat-container-scale {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: auto
+}

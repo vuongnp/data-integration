@@ -6,4 +6,4 @@ const proConfig = {
   SERVER_URI : "https://data-intergration.herokuapp.com"
 }
 
-export default proConfig; 
+export default devConfig; 
