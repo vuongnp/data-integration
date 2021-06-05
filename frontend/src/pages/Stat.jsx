@@ -25,6 +25,7 @@ export default function Stat(props) {
         if (res && res.status === 200) {
           setYearStat(res.data.statisticYear)
           setGenreStat(res.data.statisticGenres)
+          console.log(res.data.statisticYear)
         }
       }
       catch(e) {
