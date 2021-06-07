@@ -26,7 +26,7 @@ export default function OneCategory(props) {
   let nameCategory = Object.keys(props.genre)[0];
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URI}/category?text=`+nameCategory)
+      .get(`${config.SERVER_URI}/category?text=`+nameCategory+'&limit=30')
       .then((response) => {
         setFilms(response.data.data);
       })
@@ -48,7 +48,7 @@ export default function OneCategory(props) {
           <ChevronLeftIcon color="action" />
         </IconButton>
         <div className="list-items" ref={ref}>
-          {(films.slice(0,30)).map((item, index) => (
+          {films.map((item, index) => (
             <SliderFilmItem key={index} item={item}/>
           ))}
         </div>
