@@ -1,4 +1,4 @@
-import Header from "../components/header"
+import Header from "../components/header";
 import "./Genre.css";
 import React from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
@@ -11,37 +11,36 @@ import "./Stat.css";
 export default function Stat(props) {
   const [yearStat, setYearStat] = useState({
     labels: [],
-    data: []
+    data: [],
   });
   const [genreStat, setGenreStat] = useState({
     labels: [],
-    data: []
+    data: [],
   });
   const [urlStat, setUrlStat] = useState({
     labels: [],
-    data: []
+    data: [],
   });
   const [ratingStat, setRating] = useState({
     labels: [],
-    data: []
+    data: [],
   });
 
   useEffect(() => {
     async function fetch() {
       try {
-        const res = await axios.get(`${config.SERVER_URI}`+"/statistic");
+        const res = await axios.get(`${config.SERVER_URI}` + "/statistic");
         if (res && res.status === 200) {
           setYearStat(res.data.statisticYear);
           setGenreStat(res.data.statisticGenres);
           setUrlStat(res.data.statisticNumUrls);
           setRating(res.data.statisticAvgRating);
         }
-      }
-      catch(e) {
+      } catch (e) {
         console.error(e);
       }
     }
-    fetch()
+    fetch();
   }, []);
 
   const MAX = genreStat.data.reduce((res, curr) => res + curr, 0);
@@ -50,7 +49,7 @@ export default function Stat(props) {
     if (index === 0) {
       return "Trước " + item;
     }
-    return labels[index-1] + "-" + labels[index];
+    return labels[index - 1] + "-" + labels[index];
   });
 
   // const randomColors = randomColor({
@@ -68,29 +67,48 @@ export default function Stat(props) {
   //   startColor -= 30;
   //   return `rgba(-20, ${startColor}, ${255 - startColor}, 0.8)`;
   // })
+  // const randomColors = [
+  //   "FF0000", "00FF00", "0000FF", "FFFF00", "FF00FF", "00FFFF", "000000",
+  //   "800000", "008000", "000080", "808000", "800080", "008080", "808080",
+  //   "C00000", "00C000", "0000C0", "C0C000", "C000C0", "00C0C0", "C0C0C0",
+  //   "400000", "004000", "000040", "404000", "400040", "004040", "404040",
+  //   "200000", "002000", "000020", "202000", "200020", "002020", "202020",
+  //   "600000", "006000", "000060", "606000", "600060", "006060", "606060",
+  //   "A00000", "00A000", "0000A0", "A0A000", "A000A0", "00A0A0", "A0A0A0",
+  //   "E00000", "00E000", "0000E0", "E0E000", "E000E0", "00E0E0", "E0E0E0",
+  // ];
   const randomColors = [
-    "FF0000", "00FF00", "0000FF", "FFFF00", "FF00FF", "00FFFF", "000000", 
-    "800000", "008000", "000080", "808000", "800080", "008080", "808080", 
-    "C00000", "00C000", "0000C0", "C0C000", "C000C0", "00C0C0", "C0C0C0", 
-    "400000", "004000", "000040", "404000", "400040", "004040", "404040", 
-    "200000", "002000", "000020", "202000", "200020", "002020", "202020", 
-    "600000", "006000", "000060", "606000", "600060", "006060", "606060", 
-    "A00000", "00A000", "0000A0", "A0A000", "A000A0", "00A0A0", "A0A0A0", 
-    "E00000", "00E000", "0000E0", "E0E000", "E000E0", "00E0E0", "E0E0E0", 
+    "#006bb3",
+    "#24648f",
+    "#046aae",
+    "#28638a",
+    "#0969aa",
+    "#2d6286",
+    "#0d68a5",
+    "#316181",
+    "#1268a1",
+    "#36607d",
+    "#16679c",
+    "#3a5f78",
+    "#1b6698",
+    "#3e5f74",
+    "#1f6593",
+    "#435e70",
   ];
-  const randomHex = randomColors.map((c) => "#" + c);
-  function hexToRgbA(hex){
+  const randomHex = randomColors.map((c) => "" + c);
+  function hexToRgbA(hex) {
     var c;
-    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-        c= hex.substring(1).split('');
-        if(c.length== 3){
-            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
-        }
-        c= '0x'+c.join('');
-        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',1)';
+    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+      c = hex.substring(1).split("");
+      if (c.length == 3) {
+        c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+      }
+      c = "0x" + c.join("");
+      return (
+        "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") + ",1)"
+      );
     }
-    throw new Error('Bad Hex');
-  
+    throw new Error("Bad Hex");
   }
   // console.debug("Random"+JSON.stringify(randomColors));
 
@@ -98,9 +116,9 @@ export default function Stat(props) {
     labels: [...genreStat.labels],
     datasets: [
       {
-        label: 'Tỉ lệ phim',
-        data: genreStat.data.map(e => e/MAX),
-        backgroundColor: randomColors.map(c => hexToRgbA("#"+c)),
+        label: "Tỉ lệ phim",
+        data: genreStat.data.map((e) => e / MAX),
+        // backgroundColor: randomColors.map(c => hexToRgbA(""+c)),
         // borderColor: randomBColors,
         // borderColor: [
         //   'rgba(255, 99, 132, 1)',
@@ -110,20 +128,36 @@ export default function Stat(props) {
         //   'rgba(153, 102, 255, 1)',
         //   'rgba(255, 159, 64, 1)',
         // ],
+        backgroundColor: [
+          "#cc0000",
+          "#cc6600",
+          "#cccc00",
+          "#66cc00",
+          "#00cc66",
+          "#00cc99",
+          "#00cccc",
+          "#0033cc",
+          "#6600cc",
+          "#cc00cc",
+          "#cc0066",
+          "#cc0033",
+          "#36607d",
+          "#000d1a",
+        ],
         borderWidth: 2,
       },
     ],
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
   };
 
-  return(
+  return (
     <div className="container-stat">
       <Header />
-      <div style={{marginTop:"100px"}}></div>
+      <div style={{ marginTop: "100px" }}></div>
       <div className="stat-container">
         <div>
-          <h3 style={{color: "black"}}>
+          <h3 style={{ color: "black" }}>
             Thống kê số lượng phim theo khoảng thời gian
           </h3>
           <Line
@@ -132,39 +166,38 @@ export default function Stat(props) {
               datasets: [
                 {
                   label: "Khoảng thời gian",
-                  backgroundColor: ["#8e5ea2"
-                  //   "#3e95cd",
-                  //   "#8e5ea2",
-                  //   "#3cba9f",
-                  //   "#e8c3b9",
-                  //   "#c45850"
+                  backgroundColor: [
+                    "#8e5ea2",
+                    //   "#3e95cd",
+                    //   "#8e5ea2",
+                    //   "#3cba9f",
+                    //   "#e8c3b9",
+                    //   "#c45850"
                   ],
-                  data: [...yearStat.data]
-                }
-              ]
+                  data: [...yearStat.data],
+                },
+              ],
             }}
             options={{
               legend: { display: true },
               title: {
                 color: "black",
                 display: true,
-                text: "Thống kê phim"
-              }
+                text: "Thống kê phim",
+              },
             }}
           />
         </div>
       </div>
       <div className="stat-container">
-        <h3 style={{color: "black", marginTop: "70px"}}>
+        <h3 style={{ color: "black", marginTop: "70px" }}>
           Thống kê tỉ lệ phim theo thể loại
         </h3>
         <Doughnut data={sData} />
       </div>
-      <div style={{marginBottom:"100px"}}></div>
+      <div style={{ marginBottom: "100px" }}></div>
       <div className="stat-container">
-        <h3 style={{color: "black"}}>
-          Thống kê điểm IMDB theo thể loại
-        </h3>
+        <h3 style={{ color: "black" }}>Thống kê điểm đánh giá theo thể loại</h3>
         <Bar
           data={{
             labels: ratingStat.labels,
@@ -178,55 +211,56 @@ export default function Stat(props) {
                 // //   "#e8c3b9",
                 // //   "#c45850"
                 // ],
-                backgroundColor: randomHex,
-                data: [...ratingStat.data]
-              }
-            ]
+                backgroundColor: ["#ffa31a"],
+                data: [...ratingStat.data],
+              },
+            ],
           }}
           options={{
             legend: { display: true },
             title: {
               color: "black",
               display: true,
-              text: "Thống kê phim"
-            }
+              text: "Thống kê phim",
+            },
           }}
         />
       </div>
-      <div style={{marginBottom:"100px"}}></div>
+      <div style={{ marginBottom: "100px" }}></div>
       <div className="stat-container-scale">
-        <h3 style={{color: "black"}}>
-          Thống kê số lượng phim theo số nguồn
-        </h3>
+        <h3 style={{ color: "black" }}>Thống kê số lượng phim theo số nguồn</h3>
         <Bar
           data={{
-            labels: [...urlStat.labels].slice().splice(1, urlStat.labels.length),
+            labels: [...urlStat.labels]
+              .slice()
+              .splice(1, urlStat.labels.length),
             datasets: [
               {
                 label: "Số lượng",
-                backgroundColor: ["#ffe4b2"
-                //   "#3e95cd",
-                //   "#8e5ea2",
-                //   "#3cba9f",
-                //   "#e8c3b9",
-                //   "#c45850"
+                backgroundColor: [
+                  "#138613",
+                  //   "#3e95cd",
+                  //   "#8e5ea2",
+                  //   "#3cba9f",
+                  //   "#e8c3b9",
+                  //   "#c45850"
                 ],
-                data: [...urlStat.data].slice().splice(1, urlStat.data.length)
-              }
-            ]
+                data: [...urlStat.data].slice().splice(1, urlStat.data.length),
+              },
+            ],
           }}
           options={{
-            indexAxis: 'y',
+            indexAxis: "y",
             legend: { display: true },
             title: {
               color: "black",
               display: true,
-              text: "Thống kê phim"
-            }
+              text: "Thống kê phim",
+            },
           }}
         />
       </div>
-      <div style={{marginBottom:"100px"}}></div>
+      <div style={{ marginBottom: "100px" }}></div>
     </div>
-  )
+  );
 }

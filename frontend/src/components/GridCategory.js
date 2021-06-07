@@ -8,8 +8,8 @@ export default function GridCategory() {
   const categories = [{'imdb':"TOP IMDB"},{'action':"HÀNH ĐỘNG"},{'romance':"LÃNG MẠN"},{'drama':"KỊCH TÍNH"}];
   return (
       <ul className="#content">
-        {categories.map((item) => (
-          <li>
+        {categories.map((item, id) => (
+          <li key={id}>
             <OneCategory genre={item}/>
           </li>
         ))}

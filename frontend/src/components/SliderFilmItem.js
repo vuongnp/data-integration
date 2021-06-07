@@ -24,7 +24,7 @@ export default function SliderFilmItem(props) {
         <img src={props.item.image} alt=""></img>
         <p>{props.item.title}</p>
         {isHovering && (
-          <div class="watch-now">
+          <div className="watch-now">
             <div style={{fontSize: 26, color: "white", fontWeight:"bold"}}>Xem ngay</div>
             {props.item.urls && props.item.urls.map((link) => (
               <div>
