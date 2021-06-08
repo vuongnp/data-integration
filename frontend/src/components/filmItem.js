@@ -22,8 +22,8 @@ export default function FilmItem(props) {
       <div className="right-item">
         <span className="imdb-score">IMDB {props.item.rating}</span>
         {listlinks &&
-          listlinks.map((link) => (
-            <div>
+          listlinks.map((link, id) => (
+            <div key={id}>
               <a href={link}>{getNamePage(link)}</a>
             </div>
           ))}

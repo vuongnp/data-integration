@@ -22,9 +22,15 @@ export default function Genre() {
     let end = start + numberFilmsPage;
     setFilmsPage(films.slice(start, end));
   };
+
+
   useEffect(() => {
+    let aimURL = `${config.SERVER_URI}/category?text=` + genreName;
+    if (genreName === "imdb") {
+      aimURL = aimURL + "&limit=100";
+    }
     axios
-      .get(`${config.SERVER_URI}/category?text=` + genreName)
+      .get(aimURL)
       .then((response) => {
         setFilms(response.data.data);
         setNumberPages(Math.ceil(response.data.data.length / numberFilmsPage));
@@ -52,8 +58,8 @@ export default function Genre() {
       <div className="main">
         <Container>
           <Row>
-            {filmsPage.map((item) => (
-              <Col xs={4}>
+            {filmsPage.map((item, id) => (
+              <Col xs={4} key={id}>
                 <FilmItem item={item} />
               </Col>
             ))}

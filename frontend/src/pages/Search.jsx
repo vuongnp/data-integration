@@ -11,7 +11,7 @@ import config from "../config/config";
 
 export default function Search() {
   let { text } = useParams();
-  console.log('text',text);
+  // console.log('text',text);
   let [films, setFilms] = useState([]);
   let [totalTilms, setTotalFilms] = useState(0);
   const [filmsPage, setFilmsPage] = useState([]);
@@ -49,8 +49,8 @@ export default function Search() {
       <div className="main">
         <Container>
           <Row>
-            {filmsPage.map((item) => (
-              <Col xs={4}>
+            {filmsPage.map((item, id) => (
+              <Col xs={4} key={id}>
                 <FilmItem item={item} />
               </Col>
             ))}
