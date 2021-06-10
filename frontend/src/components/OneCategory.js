@@ -26,7 +26,7 @@ export default function OneCategory(props) {
   let nameCategory = Object.keys(props.genre)[0];
   useEffect(() => {
     axios
-      .get(`${config.SERVER_URI}/category?text=`+nameCategory+'&limit=30')
+      .get(`${config.SERVER_URI}/category?text=`+nameCategory+'&page=1&limit=30')
       .then((response) => {
         setFilms(response.data.data);
       })
