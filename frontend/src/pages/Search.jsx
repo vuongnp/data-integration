@@ -51,8 +51,8 @@ export default function Search() {
       <div className="main">
         <Container>
           <Row>
-            {filmsPage.map((item) => (
-              <Col xs={4}>
+            {filmsPage.map((item, id) => (
+              <Col xs={4} key={id}>
                 <FilmItem item={item} />
               </Col>
             ))}
