@@ -12,31 +12,33 @@ import config from "../config/config";
 export default function Search() {
   let { text } = useParams();
   console.log('text',text);
-  let [films, setFilms] = useState([]);
+  // let [films, setFilms] = useState([]);
   let [totalTilms, setTotalFilms] = useState(0);
   const [filmsPage, setFilmsPage] = useState([]);
+  const [page, setPage] = useState(1);
   const numberFilmsPage = 30;
   const [numberPages, setNumberPages] = useState(1);
 
   const handleNextPage = (event, page) => {
-    let start = (page - 1) * numberFilmsPage;
-    let end = start + numberFilmsPage;
-    setFilmsPage(films.slice(start, end));
+    // let start = (page - 1) * numberFilmsPage;
+    // let end = start + numberFilmsPage;
+    // setFilmsPage(films.slice(start, end));
+    setPage(page);
   };
   useEffect(() => {
     axios
-    .get(`${config.SERVER_URI}/search?text=` + text)
+    .get(`${config.SERVER_URI}/search?text=` + text+'&page='+page+'&limit='+numberFilmsPage)
       .then((response) => {
-        setFilms(response.data.data);
-        setTotalFilms(response.data.data.length);
-        setNumberPages(Math.ceil(response.data.data.length / numberFilmsPage));
-        setFilmsPage(response.data.data.slice(0, numberFilmsPage));
+        // setFilms(response.data.data);
+        setTotalFilms(response.data.length);
+        setNumberPages(Math.ceil(response.data.length / numberFilmsPage));
+        setFilmsPage(response.data.data);
         // console.log(response.data);
       })
       .catch((error) => {
         console.error("There was an error!", error);
       });
-  },[]);
+  },[page]);
   // console.log(films);
   return (
     <div className="container-films">
